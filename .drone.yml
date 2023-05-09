@@ -23,6 +23,5 @@ steps:
   - name: Build Firmware
     image: ubuntu:20.04
     commands:
-      - cd ${DRONE_WORKSPACE}
-      - chmod +x ./buildbot.sh
+      - chmod +x buildbot.sh
       - ./buildbot.sh
