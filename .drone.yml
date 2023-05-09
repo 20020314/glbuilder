@@ -1,0 +1,28 @@
+kind: pipeline
+type: docker
+name: Create Release
+
+trigger:
+  event:
+    - push
+  branch:
+    - main
+  tag:
+    - 'v*'
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+  - name: Checkout
+    image: plugins/git
+    settings:
+      depth: 1
+
+  - name: Build Firmware
+    image: ubuntu:20.04
+    commands:
+      - cd ${DRONE_WORKSPACE}
+      - chmod +x ./buildbot.sh
+      - ./buildbot.sh
